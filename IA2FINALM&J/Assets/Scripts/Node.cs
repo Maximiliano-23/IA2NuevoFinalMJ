@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    public Transform characterPos;
+
     public LayerMask Wall;
     public LayerMask nodeLayer;
     private Renderer _renderer;
@@ -18,6 +20,7 @@ public class Node : MonoBehaviour
     public Color costColor = Color.green - new Color(0, 0.3f, 0);
     void Start()
     {
+        characterPos = this.transform;
         _renderer = GetComponent<Renderer>();
         _neighbors = new List<Node>();
         SetCost(1);

@@ -62,11 +62,13 @@
     <Compile Include="Assets\Scripts\EventFSM\EventFSM.cs" />
     <Compile Include="Assets\Scripts\PathfindingLM.cs" />
     <Compile Include="Assets\Scripts\GOAPActionsLM.cs" />
+    <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\CookAgent.cs" />
     <Compile Include="Assets\Scripts\Ingredient.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GOAPManagerLM.cs" />
+    <Compile Include="Assets\Scripts\ObjectsBase.cs" />
     <Compile Include="Assets\Scripts\EventFSM\Transition.cs" />
     <Compile Include="Assets\Scripts\EventFSM\State.cs" />
     <Compile Include="Assets\Scripts\PriorityQueue.cs" />

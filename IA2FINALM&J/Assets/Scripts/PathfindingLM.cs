@@ -28,10 +28,10 @@ public class Pathfinding
                 var path = new List<Vector3>();
                 while (current != start)
                 {
-                    //path.Add(current.characterPos.position);
+                    path.Add(current.characterPos.position);
                     current = cameFrom[current];
                 }
-                //path.Add(start.characterPos.position);
+                path.Add(start.characterPos.position);
                 path.Reverse();
                 return path;
             }
@@ -44,7 +44,7 @@ public class Pathfinding
 
                 if (!costSoFar.ContainsKey(item) || newCost < costSoFar[current])
                 {
-                    //frontier.Enqueue(item, newCost + Heuristic(end.characterPos.position, item.characterPos.position));
+                    frontier.Enqueue(item, newCost + Heuristic(end.characterPos.position, item.characterPos.position));
                     cameFrom[item] = current;
                     costSoFar[item] = newCost;
                 }

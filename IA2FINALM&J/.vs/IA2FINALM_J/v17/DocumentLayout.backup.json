@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|c:\\everythingmaxineeds\\programacion\\unityhub\\unityproyects\\ia2nuevofinalmj\\ia2finalm\u0026j\\assets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\assets\\scripts\\cookagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|c:\\everythingmaxineeds\\programacion\\unityhub\\unityproyects\\ia2nuevofinalmj\\ia2finalm\u0026j\\assets\\scripts\\cookagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cookagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,15 +15,16 @@
       "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\goapmanagerlm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|c:\\everythingmaxineeds\\programacion\\unityhub\\unityproyects\\ia2nuevofinalmj\\ia2finalm\u0026j\\assets\\scripts\\pathfindinglm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\pathfindinglm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2FINALNuevo\\IA2FINAL\\Assets\\Scripts\\Things.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\assets\\scripts\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\assets\\scripts\\ingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0BB81834-5FCE-30EA-F006-27E5AB07D7B3}|Assembly-CSharp.csproj|C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\assets\\scripts\\worldstatelm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,61 +38,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Node.cs",
               "DocumentMoniker": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\Node.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Node.cs",
               "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\Node.cs",
               "RelativeToolTip": "Assets\\Scripts\\Node.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T21:09:24.127Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
               "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-19T23:19:20.403Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Things.cs",
-              "DocumentMoniker": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2FINALNuevo\\IA2FINAL\\Assets\\Scripts\\Things.cs",
-              "RelativeDocumentMoniker": "..\\..\\IA2FINALNuevo\\IA2FINAL\\Assets\\Scripts\\Things.cs",
-              "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2FINALNuevo\\IA2FINAL\\Assets\\Scripts\\Things.cs",
-              "RelativeToolTip": "..\\..\\IA2FINALNuevo\\IA2FINAL\\Assets\\Scripts\\Things.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T00:34:02.681Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PathfindingLM.cs",
-              "DocumentMoniker": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\PathfindingLM.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\PathfindingLM.cs",
-              "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\PathfindingLM.cs",
-              "RelativeToolTip": "Assets\\Scripts\\PathfindingLM.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAhwB8AAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-28T23:22:13.759Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -101,10 +74,10 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\WorldStateLM.cs",
               "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\WorldStateLM.cs",
               "RelativeToolTip": "Assets\\Scripts\\WorldStateLM.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAowCkAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-19T23:20:54.198Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -114,10 +87,35 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GOAPManagerLM.cs",
               "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\GOAPManagerLM.cs",
               "RelativeToolTip": "Assets\\Scripts\\GOAPManagerLM.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAF4AAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwF4AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-19T23:17:37.564Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\Inventory.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Inventory.cs",
+              "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\Inventory.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Inventory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T20:16:19.409Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Ingredient.cs",
+              "DocumentMoniker": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\Ingredient.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Ingredient.cs",
+              "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\Ingredient.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Ingredient.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T00:44:40.71Z"
             },
             {
               "$type": "Document",
@@ -127,7 +125,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\CookAgent.cs",
               "ToolTip": "C:\\EverythingMaxiNeeds\\Programacion\\UnityHub\\UnityProyects\\IA2NuevoFinalMJ\\IA2FINALM\u0026J\\Assets\\Scripts\\CookAgent.cs",
               "RelativeToolTip": "Assets\\Scripts\\CookAgent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-19T23:20:26.636Z",
               "EditorCaption": ""
