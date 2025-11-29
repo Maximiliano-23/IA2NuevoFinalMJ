@@ -19,7 +19,7 @@ public class GOAPManager
     {
             return new List<GOAPActions>()
         {
-            // --- Elegir mezcla ---
+            // --- Elegir mezcla que lo haga al final de calcular todo para saber cual le conviene antes de arrancar a caminar ---
             new GOAPActions("Choose Vanilla")
             .SetCost(1)
             .Precondition(x => x.state.selectedMix != MixType.Vanilla)
@@ -30,7 +30,7 @@ public class GOAPManager
             }),
 
             new GOAPActions("Choose Chocolate")
-            .SetCost(1)
+            .SetCost(2)
             .Precondition(x => x.state.selectedMix != MixType.Chocolate)
             .Effect(x =>
             {
@@ -39,7 +39,7 @@ public class GOAPManager
             }),
 
             new GOAPActions("Choose Strawberry")
-            .SetCost(1)
+            .SetCost(3)
             .Precondition(x => x.state.selectedMix != MixType.Strawberry)
             .Effect(x =>
             {
@@ -47,25 +47,27 @@ public class GOAPManager
                 return x;
             }),
 
-            // --- Detectar ingredientes ---
-            new GOAPActions("Detect Ingredients")
-            .SetCost(1)
-            .Precondition(x => !x.state.ingredientsDetected)
-            .Effect(x =>
-            {
-                x.state.ingredientsDetected = true;
-                return x;
-            }),
+            //Poner los dos true donde van o corregir esa parte del codigo
 
-            // --- Buscar Monedas ---
-            new GOAPActions("Search for CoinsBox")
-            .SetCost(2)
-            .Precondition(x => x.state.BoxOfCoins > 0 && !x.state.BoxNearby)
-            .Effect(x =>
-            {
-                x.state.BoxNearby = true;
-                return x;
-            }),
+            // --- Detectar ingredientes --- Por ahora sacamos porque siempre lo hace de base o sea no decision 
+            //new GOAPActions("Detect Ingredients")
+            //.SetCost(1)
+            //.Precondition(x => !x.state.ingredientsDetected)
+            //.Effect(x =>
+            //{
+            //    x.state.ingredientsDetected = true;
+            //    return x;
+            //}),
+
+            // --- Buscar Monedas --- Lo mismo que el anterior
+            //new GOAPActions("Search for CoinsBox")
+            //.SetCost(2)
+            //.Precondition(x => x.state.BoxOfCoins > 0 && !x.state.BoxNearby)
+            //.Effect(x =>
+            //{
+            //    x.state.BoxNearby = true;
+            //    return x;
+            //}),
 
             new GOAPActions("Pick Box")
             .SetCost(1)
@@ -122,6 +124,21 @@ public class GOAPManager
                 x.state.mixtureTemperature = 180f;
                 return x;
             })
+            //Agregar las precondiciones y el efecto de que ya salis con las mix contadas
+            //new GOAPActions("Go Supermarket and wait in the line")
+            //.SetCost(10)
+            //.Precondition(x => )
+            //.Effect(x =>
+            //{
+                //sale con todo comprado
+            //})
+            //new GOAPActions("Go Supermarket and pay for skip the line")
+            //.SetCost(4)
+            //.Precondition(x => tener las coins)
+            //.Effect(x =>
+            //{
+                //sale con todo comprado
+            //})
         };
     }
 
