@@ -57,24 +57,24 @@ public class GOAPManager
                 return x;
             }),
 
-            // --- Buscar huevos ---
-            new GOAPActions("Search for Eggs")
+            // --- Buscar Monedas ---
+            new GOAPActions("Search for CoinsBox")
             .SetCost(2)
-            .Precondition(x => x.state.eggsAvailable > 0 && !x.state.eggNearby)
+            .Precondition(x => x.state.BoxOfCoins > 0 && !x.state.BoxNearby)
             .Effect(x =>
             {
-                x.state.eggNearby = true;
+                x.state.BoxNearby = true;
                 return x;
             }),
 
-            new GOAPActions("Pick Egg")
+            new GOAPActions("Pick Box")
             .SetCost(1)
-            .Precondition(x => x.state.eggNearby && x.state.eggsAvailable > 0)
+            .Precondition(x => x.state.BoxNearby && x.state.BoxAvailable > 0)
             .Effect(x =>
             {
-                x.state.eggsAvailable--;
-                x.state.eggsCount++;
-                x.state.eggNearby = false;
+                x.state.BoxAvailable--;
+                x.state.BoxCount++;
+                x.state.BoxNearby = false;
                 return x;
             }),
 
@@ -92,8 +92,7 @@ public class GOAPManager
             new GOAPActions("Mix Ingredients")
             .SetCost(2)
             .Precondition(x =>
-                x.state.ingredientsDetected &&
-                x.state.eggsCount > 0 &&
+                x.state.ingredientsDetected && //ingredient count es mayor a 0
                 x.state.bowlNearby)
             .Effect(x =>
             {
@@ -117,8 +116,7 @@ public class GOAPManager
             .SetCost(3)
             .Precondition(x =>
                 x.state.ovenReachable &&
-                x.state.ingredientsDetected &&
-                x.state.eggsCount > 0)
+                x.state.ingredientsDetected)
             .Effect(x =>
             {
                 x.state.mixtureTemperature = 180f;

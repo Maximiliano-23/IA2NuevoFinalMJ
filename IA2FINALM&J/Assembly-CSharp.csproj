@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\PathfindingLM.cs" />
     <Compile Include="Assets\Scripts\GOAPActionsLM.cs" />
     <Compile Include="Assets\Scripts\CookAgent.cs" />
+    <Compile Include="Assets\Scripts\Ingredient.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GOAPManagerLM.cs" />

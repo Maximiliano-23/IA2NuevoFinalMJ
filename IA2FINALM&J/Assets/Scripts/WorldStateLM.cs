@@ -15,12 +15,13 @@ public class WorldState
         public float mixtureTemperature; // antes enemyHp
 
         // INTS
-        public int eggsCount;           // antes arrows
-        public int eggsAvailable;       // antes arrowsAvailable
+        public int BoxOfCoins;
+        public int BoxAvailable;
+        public int BoxCount;
 
         // BOOLS
         public bool ingredientsDetected; // antes detected
-        public bool eggNearby;           // antes arrowNearby
+        public bool BoxNearby;           // antes arrowNearby
         public bool ovenReachable;       // antes enemyReachable
         public bool bowlNearby;          // antes enemyNearby
         public bool canRestock;          // antes canRetreat
@@ -33,10 +34,11 @@ public class WorldState
             return new State()
             {
                 mixtureTemperature = this.mixtureTemperature,
-                eggsCount = this.eggsCount,
-                eggsAvailable = this.eggsAvailable,
+                BoxOfCoins = this.BoxOfCoins, 
+                BoxAvailable = this.BoxAvailable,
+                BoxCount = this.BoxCount,
                 ingredientsDetected = this.ingredientsDetected,
-                eggNearby = this.eggNearby,
+                BoxNearby = this.BoxNearby,
                 ovenReachable = this.ovenReachable,
                 bowlNearby = this.bowlNearby,
                 canRestock = this.canRestock,
