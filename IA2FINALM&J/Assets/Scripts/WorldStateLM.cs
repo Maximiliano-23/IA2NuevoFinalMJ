@@ -25,6 +25,10 @@ public class WorldState
         public bool ovenReachable;       // antes enemyReachable
         public bool bowlNearby;          // antes enemyNearby
         public bool canRestock;          // antes canRetreat
+        public bool hasIngredients;
+        public bool mixReady;
+        public bool cakeReady;
+        public bool supermarketNearby;
 
         // ENUM
         public MixType selectedMix;      // antes equippedWeapon

@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -370,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -499,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -628,6 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -757,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -886,6 +891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1015,6 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1144,6 +1151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1273,6 +1281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1402,6 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1469,7 +1479,8 @@ MonoBehaviour:
   - {fileID: 2132449020}
   - {fileID: 2031544194}
   - {fileID: 296520721}
-  objets: []
+  objets:
+  - {fileID: 1476531050}
 --- !u!4 &650197513
 Transform:
   m_ObjectHideFlags: 0
@@ -1603,6 +1614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1732,6 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -1861,6 +1874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2082,6 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2211,6 +2226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2340,6 +2356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2469,6 +2486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2598,6 +2616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2727,6 +2746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -2974,6 +2994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -3103,6 +3124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -3338,6 +3360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -3561,6 +3584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -3690,6 +3714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -3819,6 +3844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66340ce5f55b24c865852f3fda2e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPos: {fileID: 0}
   Wall:
     serializedVersion: 2
     m_Bits: 0
@@ -3842,6 +3868,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7da39b5f2460bb848bd84b50bd3af9e0, type: 2}
+    - target: {fileID: 5581774506920578314, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+      propertyPath: gm
+      value: 
+      objectReference: {fileID: 650197512}
     - target: {fileID: 6899891331791157103, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
       propertyPath: m_Name
       value: PJ

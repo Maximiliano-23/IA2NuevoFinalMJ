@@ -18,7 +18,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Elegir nodo random
+            Node randomNode = _node[Random.Range(0, _node.Count)];
+            agent.GoToNode(randomNode);
+        }
     }
     void SpawnObjectsOnRandomNodesNoRepeat()
     {

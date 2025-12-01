@@ -99,7 +99,7 @@ public class GOAPManager
             .Effect(x =>
             {
                 // aquí no cambia nada del estado más que decir que mezcla está lista
-                // o podrías agregar un flag mixReady
+                x.state.mixReady = true;
                 return x;
             }),
 
@@ -122,23 +122,37 @@ public class GOAPManager
             .Effect(x =>
             {
                 x.state.mixtureTemperature = 180f;
+                x.state.cakeReady = true;
+                return x;
+            }),
+            //Agregar las precondiciones y el efecto de que ya salis con las mix contadas
+            new GOAPActions("Go Supermarket (wait in line)")
+            .SetCost(10)
+            .Precondition(x =>
+                x.state.canRestock &&                // está permitido reabastecer
+                !x.state.ingredientsDetected &&      // no tiene ingredientes aún
+                x.state.supermarketNearby)           // supermercado alcanzable
+            .Effect(x =>
+            {
+                // vuelve con todo comprado pero tardó más (cost alto)
+                x.state.ingredientsDetected = true;
+                x.state.hasIngredients = true;
+                return x;
+            }),
+           new GOAPActions("Go Supermarket (skip line)")
+            .SetCost(4)
+            .Precondition(x =>
+                x.state.canRestock &&                // puede reabastecer
+                !x.state.ingredientsDetected &&
+                x.state.supermarketNearby &&
+                x.state.BoxCount>= 1)                  
+            .Effect(x =>
+            {
+                x.state.BoxCount--;                     // gasta box para saltarse la fila
+                x.state.ingredientsDetected = true;
+                x.state.hasIngredients = true;
                 return x;
             })
-            //Agregar las precondiciones y el efecto de que ya salis con las mix contadas
-            //new GOAPActions("Go Supermarket and wait in the line")
-            //.SetCost(10)
-            //.Precondition(x => )
-            //.Effect(x =>
-            //{
-                //sale con todo comprado
-            //})
-            //new GOAPActions("Go Supermarket and pay for skip the line")
-            //.SetCost(4)
-            //.Precondition(x => tener las coins)
-            //.Effect(x =>
-            //{
-                //sale con todo comprado
-            //})
         };
     }
 

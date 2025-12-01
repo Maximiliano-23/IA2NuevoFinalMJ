@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public Transform characterPos;
+    public Transform characterPos;// Reference to the position of the node
 
     public LayerMask Wall;
     public LayerMask nodeLayer;
