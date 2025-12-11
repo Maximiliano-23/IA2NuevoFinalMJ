@@ -30,7 +30,7 @@ public class GOAPManager
             }),
 
             new GOAPActions("Choose Chocolate")
-            .SetCost(2)
+            .SetCost(1)
             .Precondition(x => x.state.selectedMix != MixType.Chocolate)
             .Effect(x =>
             {
@@ -39,7 +39,7 @@ public class GOAPManager
             }),
 
             new GOAPActions("Choose Strawberry")
-            .SetCost(3)
+            .SetCost(1)
             .Precondition(x => x.state.selectedMix != MixType.Strawberry)
             .Effect(x =>
             {
@@ -116,6 +116,17 @@ public class GOAPManager
             // --- Hornear ---
             new GOAPActions("Bake Cake")
             .SetCost(3)
+            .Precondition(x =>
+                x.state.ovenReachable &&
+                x.state.ingredientsDetected)
+            .Effect(x =>
+            {
+                x.state.mixtureTemperature = 180f;
+                x.state.cakeReady = true;
+                return x;
+            }),
+             new GOAPActions("Feel Full")
+            .SetCost(1)
             .Precondition(x =>
                 x.state.ovenReachable &&
                 x.state.ingredientsDetected)

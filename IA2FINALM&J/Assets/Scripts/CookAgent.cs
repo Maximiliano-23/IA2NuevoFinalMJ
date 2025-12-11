@@ -262,7 +262,7 @@ public class CookAgent : MonoBehaviour
 
     IEnumerator DoWaitCoroutine(float seconds)
     {
-        float t = 0f;
+        float t = 1f;
         while (t < seconds) { t += Time.deltaTime; yield return null; }
         fsm.Feed("DONE");
     }
