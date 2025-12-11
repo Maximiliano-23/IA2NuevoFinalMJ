@@ -11,40 +11,43 @@ public class WorldState
 {
     public struct State
     {
-        // FLOAT
-        public float mixtureTemperature; // antes enemyHp
 
-        // INTS
-        public int BoxOfCoins;
-        public int BoxAvailable;
+        public float mixtureTemperature; 
+
+
+        public int Coins;
+        //public int BoxAvailable;
         public int BoxCount;
 
-        // BOOLS
-        public bool ingredientsDetected; // antes detected
-        public bool BoxNearby;           // antes arrowNearby
-        public bool ovenReachable;       // antes enemyReachable
-        public bool bowlNearby;          // antes enemyNearby
-        public bool canRestock;          // antes canRetreat
+
+        //public bool ingredientsDetected; 
+        //public bool BoxNearby;           
+        //public bool ovenReachable;       
+        public bool bowlNearby;          
+        public bool canRestock;          
         public bool hasIngredients;
         public bool mixReady;
         public bool cakeReady;
-        public bool supermarketNearby;
 
-        // ENUM
-        public MixType selectedMix;      // antes equippedWeapon
+
+        public float hunger;
+        //public bool supermarketNearby;
+
+
+        public MixType selectedMix;     
 
         public State Clone()
         {
             return new State()
             {
                 mixtureTemperature = this.mixtureTemperature,
-                BoxOfCoins = this.BoxOfCoins, 
-                BoxAvailable = this.BoxAvailable,
+                Coins = this.Coins, 
+                //BoxAvailable = this.BoxAvailable,
                 BoxCount = this.BoxCount,
-                ingredientsDetected = this.ingredientsDetected,
-                BoxNearby = this.BoxNearby,
-                ovenReachable = this.ovenReachable,
-                bowlNearby = this.bowlNearby,
+                //ingredientsDetected = this.ingredientsDetected,
+                //BoxNearby = this.BoxNearby,
+                //ovenReachable = this.ovenReachable,
+                //bowlNearby = this.bowlNearby,
                 canRestock = this.canRestock,
                 selectedMix = this.selectedMix,
             };
