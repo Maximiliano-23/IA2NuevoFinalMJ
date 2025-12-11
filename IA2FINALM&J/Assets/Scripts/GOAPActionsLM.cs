@@ -12,7 +12,13 @@ public class GOAPActions
 
     public int Cost { get; private set; }
 
-    public Action agentBehaviour;
+    // TARGETS
+    public Node targetNode;
+    public Vector3? targetPosition;
+    public GameObject targetObject;
+
+    // ACTION BEHAVIOUR
+    public Action<CookAgent> agentBehaviour;
 
     public GOAPActions(string name)
     {
@@ -22,13 +28,20 @@ public class GOAPActions
     public GOAPActions SetCost(int cost)
     {
         Cost = cost;
-
         return this;
     }
 
-    public GOAPActions SetBehaviour(Action behaviour)
+    // Permite SetBehaviour con Action<CookAgent>
+    public GOAPActions SetBehaviour(Action<CookAgent> behaviour)
     {
         agentBehaviour = behaviour;
+        return this;
+    }
+
+    // PERMITE también usar lambdas sin parámetros => SetBehaviour(() => {...})
+    public GOAPActions SetBehaviour(Action behaviour)
+    {
+        agentBehaviour = (agent) => behaviour();
         return this;
     }
 
