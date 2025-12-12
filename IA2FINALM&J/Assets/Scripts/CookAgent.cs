@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using IA2; // tu namespace de EventFSM/State/Transition
+using IA2;
+using System.Data;
+using System.Linq;
+using System; // tu namespace de EventFSM/State/Transition
 
 public class CookAgent : MonoBehaviour
 {
@@ -10,35 +13,46 @@ public class CookAgent : MonoBehaviour
     Pathfinding pathfinding;
     GameManager gm;
     GOAPManager goap;
+    Material material;
+
+    public List<Ingredient> Strawberry;
+    public List<Ingredient> Chocolate;
+    public List<Ingredient> Vanilla;
 
     // movement
     List<Vector3> currentPath;
+    Vector3 FinalPos;
     int pathIndex = 0;
     public float speed = 3f;
+    public List<Vector3> _pathToFollow = new List<Vector3>();
 
     // planning
-    List<GOAPActions> currentPlan;
+    List<Action> currentPlan;
     int planIndex = 0;
     public WorldState worldState = new WorldState();
 
     // FSM: usamos string como trigger/input
     EventFSM<string> fsm;
-    State<string> idleState, moveState, pickupState, interactState, waitState;
+   
 
     void Start()
     {
-        inventory = GetComponent<Inventory>();
-        if (inventory == null) inventory = gameObject.AddComponent<Inventory>();
+        Strawberry = GameManager.instance.Strawberry;
+        Chocolate = GameManager.instance.Strawberry;
+        Vanilla = GameManager.instance.Strawberry;
         pathfinding = new Pathfinding();
         gm = FindObjectOfType<GameManager>();
         goap = new GOAPManager(gm);
+        material = GetComponent<Renderer>().material;
+
+
 
         BuildStatesAndFSM();
     }
 
     void Update()
     {
-        // actualiza la FSM (llama al Update del estado actual)
+       
         fsm.Update();
 
         // si estamos moviéndonos, avanzar en el path
@@ -65,12 +79,76 @@ public class CookAgent : MonoBehaviour
     // ------------------------------
     void BuildStatesAndFSM()
     {
-        // 1) crear estados
-        idleState = new State<string>("Idle");
-        moveState = new State<string>("Move");
-        pickupState = new State<string>("Pickup");
-        interactState = new State<string>("Interact");
-        waitState = new State<string>("Wait");
+        var idleState = new State<string>("Idle");
+        var moveState = new State<string>("Move");
+        var pickupState = new State<string>("Pickup");
+        var interactState = new State<string>("Interact");
+
+        StateConfigurer.Create(idleState).
+            SetTransition("Idle", idleState).
+            SetTransition("Move", moveState).
+            SetTransition("Pickup", pickupState).
+            SetTransition("Interact", interactState).
+            Done();
+        StateConfigurer.Create(moveState).
+            SetTransition("Idle", idleState).
+            SetTransition("Move", moveState).
+            SetTransition("Pickup", pickupState).
+            SetTransition("Interact", interactState).
+            Done();
+        StateConfigurer.Create(pickupState).
+            SetTransition("Idle", idleState).
+            SetTransition("Move", moveState).
+            SetTransition("Pickup", pickupState).
+            SetTransition("Interact", interactState).
+            Done();
+        StateConfigurer.Create(interactState).
+            SetTransition("Idle", idleState).
+            SetTransition("Move", moveState).
+            SetTransition("Pickup", pickupState).
+            SetTransition("Interact", interactState).
+            Done();
+
+        moveState.OnEnter += x => material.color = Color.blue;
+        moveState.OnUpdate += () =>
+        {
+            if (_pathToFollow.Count > 0)
+                TravelThroughPath();//chequiar por objetivo final del GOAP
+            else 
+            { 
+                //avanzar al siguiente estado
+            }
+        };
+        pickupState.OnEnter += x => material.color = Color.white;
+        interactState.OnEnter += x => material.color = Color.green;
+        idleState.OnEnter += x => material.color = Color.red;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // 2) configurar eventos de lifecycle (Enter/Update/Exit)
         idleState.OnEnter += (inpt) => {
@@ -88,7 +166,7 @@ public class CookAgent : MonoBehaviour
 
         moveState.OnEnter += (inpt) => {
             // Al entrar a Move, tomar la acción actual y pedir movimiento
-            StartMoveToCurrentActionTarget();
+            //StartMoveToCurrentActionTarget();
         };
 
         // pickup: en Enter ejecutamos la recolección (simulado como coroutine breve)
@@ -97,58 +175,25 @@ public class CookAgent : MonoBehaviour
         };
 
         interactState.OnEnter += (inpt) => {
-            StartCoroutine(DoInteractCoroutine());
+            //StartCoroutine(DoInteractCoroutine());
         };
 
-        waitState.OnEnter += (inpt) => {
-            StartCoroutine(DoWaitCoroutine(2f));
-        };
 
-        // 3) crear diccionarios de transiciones para cada estado
-        // Idle: DO_ACTION -> Move
-        var idleTransitions = new Dictionary<string, Transition<string>>() {
-            { "DO_ACTION", new Transition<string>("DO_ACTION", moveState) }
-        };
-        idleState.Configure(idleTransitions);
-
-        // Move: ARRIVED -> Interact, FOUND_OBJECT -> Pickup
-        var moveTransitions = new Dictionary<string, Transition<string>>() {
-            { "ARRIVED", new Transition<string>("ARRIVED", interactState) },
-            { "FOUND_OBJECT", new Transition<string>("FOUND_OBJECT", pickupState) }
-        };
-        moveState.Configure(moveTransitions);
-
-        // Pickup: DONE -> Idle
-        var pickupTransitions = new Dictionary<string, Transition<string>>() {
-            { "DONE", new Transition<string>("DONE", idleState) }
-        };
-        pickupState.Configure(pickupTransitions);
-
-        // Interact: DONE -> Idle
-        var interactTransitions = new Dictionary<string, Transition<string>>() {
-            { "DONE", new Transition<string>("DONE", idleState) }
-        };
-        interactState.Configure(interactTransitions);
-
-        // Wait: DONE -> Idle
-        var waitTransitions = new Dictionary<string, Transition<string>>() {
-            { "DONE", new Transition<string>("DONE", idleState) }
-        };
-        waitState.Configure(waitTransitions);
-
-        // 4) crear la FSM con estado inicial Idle
+       
         fsm = new EventFSM<string>(idleState);
     }
 
-    // ------------------------------
-    // PLANNING (usa tu GOAPManager.TryGetPlan)
-    // ------------------------------
+    public void PickUpVanilla(string name) 
+    {
+        Debug.Log("Elegiste la vanilla: " + name);
+    }
+  
     void TryPlan()
     {
         // ensure worldState is up-to-date (por ejemplo, worldState.state.ingredientsDetected etc.)
         if (goap.TryGetPlan(worldState, out List<GOAPActions> plan))
         {
-            currentPlan = plan;
+            currentPlan = plan.Select(x => x.agentBehaviour).ToList();
             planIndex = 0;
             Debug.Log("Plan obtenido con " + plan.Count + " acciones.");
         }
@@ -157,6 +202,26 @@ public class CookAgent : MonoBehaviour
             currentPlan = null;
             Debug.Log("No se pudo generar plan");
         }
+    }
+
+    public void TravelThroughPath()
+    {
+        if (_pathToFollow == null || _pathToFollow.Count == 0) return;
+        Vector3 posTarget = _pathToFollow[0];
+        Vector3 dir = posTarget - transform.position;
+        if (dir.magnitude < 0.05f)
+        {
+            //SetPosition(posTarget);
+            _pathToFollow.RemoveAt(0);
+        }
+
+        Move(dir);
+    }
+
+    public void Move(Vector3 dir)
+    {
+        transform.LookAt(transform.position + dir, Vector3.back);
+        transform.position += dir.normalized * speed * Time.deltaTime;
     }
 
     // ------------------------------
@@ -174,7 +239,7 @@ public class CookAgent : MonoBehaviour
         return best;
     }
 
-    void StartMoveToCurrentActionTarget()
+    /*void StartMoveToCurrentActionTarget()
     {
         if (currentPlan == null || planIndex >= currentPlan.Count)
         {
@@ -183,7 +248,7 @@ public class CookAgent : MonoBehaviour
             return;
         }
 
-        GOAPActions action = currentPlan[planIndex];
+        //GOAPActions action = currentPlan[planIndex];
 
         // Necesitamos decidir destino físico según nombre de la acción
         // EJEMPLO SIMPLE: si la acción es "Go to Bowl" mover al primer nodo que tenga bowlNearby true
@@ -216,18 +281,15 @@ public class CookAgent : MonoBehaviour
             planIndex++;
             fsm.Feed("DONE");
         }
-    }
+    }*/
 
-    // ------------------------------
-    // ACTION IMPLEMENTATIONS (coroutines simuladas)
-    // ------------------------------
     IEnumerator DoPickupCoroutine()
     {
         // ejemplo simple: esperar, recoger, actualizar estado
         yield return new WaitForSeconds(0.5f);
 
         // actualizar WorldState e inventario según corresponda
-        worldState.state.hasIngredients = true;
+        
 
         // avanzar plan
         planIndex++;
@@ -236,7 +298,7 @@ public class CookAgent : MonoBehaviour
         fsm.Feed("DONE");
     }
 
-    IEnumerator DoInteractCoroutine()
+    /*IEnumerator DoInteractCoroutine()
     {
         GOAPActions action = currentPlan != null && planIndex < currentPlan.Count ? currentPlan[planIndex] : null;
         if (action != null)
@@ -258,7 +320,7 @@ public class CookAgent : MonoBehaviour
         }
 
         fsm.Feed("DONE");
-    }
+    }*/
 
     IEnumerator DoWaitCoroutine(float seconds)
     {

@@ -20,148 +20,205 @@ public class GOAPManager
             return new List<GOAPActions>()
         {
             // --- Elegir mezcla que lo haga al final de calcular todo para saber cual le conviene antes de arrancar a caminar ---
-            new GOAPActions("Choose Vanilla")
-            .SetCost(1)
-            .Precondition(x => x.state.selectedMix != MixType.Vanilla)
+            new GOAPActions("Pickup Vanilla")
+            .SetCost(2)
+            .Precondition(x => x.state.AvailableVanilla >= 1 && x.state.currentIngredient == MixType.None)
             .Effect(x =>
             {
-                x.state.selectedMix = MixType.Vanilla;
+                x.state.currentIngredient = MixType.Vanilla;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
                 return x;
             }),
 
-            new GOAPActions("Choose Chocolate")
-            .SetCost(1)
-            .Precondition(x => x.state.selectedMix != MixType.Chocolate)
+            new GOAPActions("Pickup Chocolate")
+            .SetCost(2)
+            .Precondition(x => x.state.AvailableChocolate >= 1 && x.state.currentIngredient == MixType.None)
             .Effect(x =>
             {
-                x.state.selectedMix = MixType.Chocolate;
+                x.state.currentIngredient = MixType.Chocolate;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
                 return x;
             }),
 
-            new GOAPActions("Choose Strawberry")
-            .SetCost(1)
-            .Precondition(x => x.state.selectedMix != MixType.Strawberry)
+            new GOAPActions("Pickup Strawberry")
+            .SetCost(2)
+            .Precondition(x => x.state.AvailableStrawberry >= 1 && x.state.currentIngredient == MixType.None)
             .Effect(x =>
             {
-                x.state.selectedMix = MixType.Strawberry;
+                x.state.currentIngredient = MixType.Strawberry;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
                 return x;
             }),
 
-            //Poner los dos true donde van o corregir esa parte del codigo
-
-            // --- Detectar ingredientes --- Por ahora sacamos porque siempre lo hace de base o sea no decision 
-            //new GOAPActions("Detect Ingredients")
-            //.SetCost(1)
-            //.Precondition(x => !x.state.ingredientsDetected)
-            //.Effect(x =>
-            //{
-            //    x.state.ingredientsDetected = true;
-            //    return x;
-            //}),
-
-            // --- Buscar Monedas --- Lo mismo que el anterior
-            //new GOAPActions("Search for CoinsBox")
-            //.SetCost(2)
-            //.Precondition(x => x.state.BoxOfCoins > 0 && !x.state.BoxNearby)
-            //.Effect(x =>
-            //{
-            //    x.state.BoxNearby = true;
-            //    return x;
-            //}),
-
-            new GOAPActions("Pick Box")
-            .SetCost(1)
-            .Precondition(x => x.state.BoxNearby && x.state.BoxAvailable > 0)
-            .Effect(x =>
-            {
-                x.state.BoxAvailable--;
-                x.state.BoxCount++;
-                x.state.BoxNearby = false;
-                return x;
-            }),
-
-            // --- Ir al bowl ---
-            new GOAPActions("Go to Bowl")
-            .SetCost(1)
-            .Precondition(x => !x.state.bowlNearby)
-            .Effect(x =>
-            {
-                x.state.bowlNearby = true;
-                return x;
-            }),
 
             // --- Mezclar ---
             new GOAPActions("Mix Ingredients")
-            .SetCost(2)
+            .SetCost(3)
             .Precondition(x =>
-                x.state.ingredientsDetected && //ingredient count es mayor a 0
-                x.state.bowlNearby)
+                x.state.currentIngredient !=MixType.None && x.state.currentMix == MixType.None)
             .Effect(x =>
             {
-                // aquí no cambia nada del estado más que decir que mezcla está lista
-                x.state.mixReady = true;
+                x.state.currentMix = x.state.currentIngredient ;
+                x.state.currentIngredient = MixType.None;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
                 return x;
             }),
 
-            // --- Ir al horno ---
-            new GOAPActions("Go to Oven")
+            // --- Comer ---
+             new GOAPActions("Eat Strawberry")
             .SetCost(1)
-            .Precondition(x => !x.state.ovenReachable)
+            .Precondition(x => 
+               x.state.currentCake == MixType.Strawberry)
             .Effect(x =>
             {
-                x.state.ovenReachable = true;
+                x.state.hunger -= 20;
+                x.state.currentCake = MixType.None;
+              
+                x.state.ActionsLeftToCook--;
+                return x;
+            }),
+              new GOAPActions("Eat Vanilla")
+            .SetCost(1)
+            .Precondition(x => 
+               x.state.currentCake == MixType.Vanilla)
+            .Effect(x =>
+            {
+                x.state.hunger -= 10;
+                  x.state.currentCake = MixType.None;
+                
+                x.state.ActionsLeftToCook--;
+                return x;
+            }),
+                new GOAPActions("Eat Chocolate")
+            .SetCost(1)
+            .Precondition(x => 
+               x.state.currentCake == MixType.Chocolate)
+            .Effect(x =>
+            {
+                x.state.hunger -= 30;
+                x.state.currentCake = MixType.None;
+                
+                x.state.ActionsLeftToCook--;
                 return x;
             }),
 
             // --- Hornear ---
-            new GOAPActions("Bake Cake")
-            .SetCost(3)
-            .Precondition(x =>
-                x.state.ovenReachable &&
-                x.state.ingredientsDetected)
+             new GOAPActions("Bake Cake")
+            .SetCost(2)
+            .Precondition(x => x.state.currentlyBakingCake == MixType.None &&
+                x.state.currentMix != MixType.None)
             .Effect(x =>
             {
-                x.state.mixtureTemperature = 180f;
-                x.state.cakeReady = true;
+                x.state.currentlyBakingCake = x.state.currentMix;
+                x.state.currentMix = MixType.None;
+                x.state.hunger += 0.1f;
+                x.state.ActionsLeftToCook = 4;
                 return x;
             }),
-             new GOAPActions("Feel Full")
+
+
+             new GOAPActions("Take out Cake")
+            .SetCost(2)
+            .Precondition(x =>
+                x.state.currentlyBakingCake != MixType.None && x.state.ActionsLeftToCook <= 0 )
+            .Effect(x =>
+            {
+                x.state.currentCake = x.state.currentlyBakingCake;
+                x.state.currentlyBakingCake = MixType.None;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+      
+            new GOAPActions("Buy Ingredient Vanilla")
+            .SetCost(2)
+            .Precondition(x => x.state.ShopOpen &&
+                x.state.currentIngredient == MixType.None &&
+                x.state.Coins>= 2)
+            .Effect(x =>
+            {
+                x.state.currentIngredient = MixType.Vanilla;
+                x.state.Coins -= 2;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+           new GOAPActions("Buy Ingredient Chocolate")
+            .SetCost(2)
+            .Precondition(x => x.state.ShopOpen &&
+                x.state.currentIngredient == MixType.None &&
+                x.state.Coins>= 6)
+            .Effect(x =>
+            {
+                x.state.currentIngredient = MixType.Chocolate;
+                x.state.Coins -= 6;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+            new GOAPActions("Buy Ingredient Strawberry")
+            .SetCost(2)
+            .Precondition(x => x.state.ShopOpen &&
+                x.state.currentIngredient == MixType.None &&                
+                x.state.Coins>= 4)
+            .Effect(x =>
+            {
+                x.state.currentIngredient = MixType.Strawberry;
+                x.state.Coins -= 4;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+           new GOAPActions("Buy Cake Chocolate")
+            .SetCost(2)
+            .Precondition(x => x.state.ShopOpen && x.state.currentCake == MixType.None &&
+                x.state.Coins>= 20)
+            .Effect(x =>
+            {
+                x.state.currentCake = MixType.Chocolate;
+                
+                x.state.Coins -= 20;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+           new GOAPActions("Buy Cake Vanilla")
+            .SetCost(2)
+            .Precondition(x => x.state.ShopOpen && x.state.currentCake == MixType.None &&
+                x.state.Coins>= 10)
+            .Effect(x =>
+            {
+                x.state.currentCake = MixType.Vanilla;
+                
+                x.state.Coins -= 10;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+           new GOAPActions("Buy Cake Strawberry")
+            .SetCost(2)
+            .Precondition(x => x.state.ShopOpen && x.state.currentCake == MixType.None &&
+                x.state.Coins>= 15)
+            .Effect(x =>
+            {
+                x.state.currentCake = MixType.Strawberry;
+                
+                x.state.Coins -= 15;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
+                return x;
+            }),
+
+             new GOAPActions("Wait for Cake")
             .SetCost(1)
-            .Precondition(x =>
-                x.state.ovenReachable &&
-                x.state.ingredientsDetected)
+            .Precondition(x => x.state.currentlyBakingCake != MixType.None && x.state.ActionsLeftToCook > 0)
             .Effect(x =>
             {
-                x.state.mixtureTemperature = 180f;
-                x.state.cakeReady = true;
-                return x;
-            }),
-            //Agregar las precondiciones y el efecto de que ya salis con las mix contadas
-            new GOAPActions("Go Supermarket (wait in line)")
-            .SetCost(10)
-            .Precondition(x =>
-                x.state.canRestock &&                // está permitido reabastecer
-                !x.state.ingredientsDetected &&      // no tiene ingredientes aún
-                x.state.supermarketNearby)           // supermercado alcanzable
-            .Effect(x =>
-            {
-                // vuelve con todo comprado pero tardó más (cost alto)
-                x.state.ingredientsDetected = true;
-                x.state.hasIngredients = true;
-                return x;
-            }),
-           new GOAPActions("Go Supermarket (skip line)")
-            .SetCost(4)
-            .Precondition(x =>
-                x.state.canRestock &&                // puede reabastecer
-                !x.state.ingredientsDetected &&
-                x.state.supermarketNearby &&
-                x.state.BoxCount>= 1)                  
-            .Effect(x =>
-            {
-                x.state.BoxCount--;                     // gasta box para saltarse la fila
-                x.state.ingredientsDetected = true;
-                x.state.hasIngredients = true;
+                x.state.ActionsLeftToCook--;
+                x.state.hunger += 0.1f;
                 return x;
             })
         };
@@ -172,12 +229,12 @@ public class GOAPManager
     {
         Func<WorldState, int> heuristic = x =>
         {
-            return Mathf.RoundToInt(180 - x.state.mixtureTemperature);
+            return 0;
         };
 
         Func<WorldState, bool> objective = x =>
         {
-            return x.state.mixtureTemperature >= 180f;
+            return x.state.hunger <= 0 ;
         };
 
         var worldStatePath = _pf.AStarGOAP(initialState, GetActions(), heuristic, objective);

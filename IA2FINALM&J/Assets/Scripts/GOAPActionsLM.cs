@@ -18,7 +18,7 @@ public class GOAPActions
     public GameObject targetObject;
 
     // ACTION BEHAVIOUR
-    public Action<CookAgent> agentBehaviour;
+    public Action agentBehaviour;
 
     public GOAPActions(string name)
     {
@@ -31,17 +31,10 @@ public class GOAPActions
         return this;
     }
 
-    // Permite SetBehaviour con Action<CookAgent>
-    public GOAPActions SetBehaviour(Action<CookAgent> behaviour)
-    {
-        agentBehaviour = behaviour;
-        return this;
-    }
 
-    // PERMITE también usar lambdas sin parámetros => SetBehaviour(() => {...})
     public GOAPActions SetBehaviour(Action behaviour)
     {
-        agentBehaviour = (agent) => behaviour();
+        agentBehaviour = behaviour;
         return this;
     }
 

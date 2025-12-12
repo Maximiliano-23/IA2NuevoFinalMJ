@@ -5,51 +5,47 @@ public enum MixType
 {
     Vanilla,
     Chocolate,
-    Strawberry
+    Strawberry,
+    None
 }
 public class WorldState
 {
     public struct State
     {
+        public MixType currentCake;
+        public MixType currentMix;
+        public MixType currentlyBakingCake;
 
-        public float mixtureTemperature; 
-
+        public int ActionsLeftToCook;
 
         public int Coins;
-        //public int BoxAvailable;
-        public int BoxCount;
+        public int AvailableChocolate;
+        public int AvailableStrawberry;
+        public int AvailableVanilla;
 
-
-        //public bool ingredientsDetected; 
-        //public bool BoxNearby;           
-        //public bool ovenReachable;       
-        public bool bowlNearby;          
-        public bool canRestock;          
-        public bool hasIngredients;
-        public bool mixReady;
-        public bool cakeReady;
+        public bool ShopOpen;
 
 
         public float hunger;
-        //public bool supermarketNearby;
 
 
-        public MixType selectedMix;     
+        public MixType currentIngredient;     
 
         public State Clone()
         {
             return new State()
             {
-                mixtureTemperature = this.mixtureTemperature,
                 Coins = this.Coins, 
-                //BoxAvailable = this.BoxAvailable,
-                BoxCount = this.BoxCount,
-                //ingredientsDetected = this.ingredientsDetected,
-                //BoxNearby = this.BoxNearby,
-                //ovenReachable = this.ovenReachable,
-                //bowlNearby = this.bowlNearby,
-                canRestock = this.canRestock,
-                selectedMix = this.selectedMix,
+                ActionsLeftToCook = this.ActionsLeftToCook,
+                currentCake = this.currentCake,
+                currentMix = this.currentMix,
+                currentlyBakingCake = this.currentlyBakingCake,
+                AvailableChocolate = this.AvailableChocolate,
+                AvailableStrawberry = this.AvailableStrawberry,
+                AvailableVanilla = this.AvailableVanilla,
+                ShopOpen = this.ShopOpen,
+                hunger = this.hunger,
+                currentIngredient = this.currentIngredient,
             };
         }
     }

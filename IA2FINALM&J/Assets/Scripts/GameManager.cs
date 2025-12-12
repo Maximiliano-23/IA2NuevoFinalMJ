@@ -6,30 +6,55 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public CookAgent agent;
+    public WorldState StartingWorld;
     public List<Node> _node;
-    public Ingredient[] objets;
+    [SerializeField] Ingredient Vanillaprefab, Chocolateprefab, Strawberryprefab;
+    [HideInInspector] public List<Ingredient> Chocolate, Vanilla, Strawberry;
+    public int ChocolateCount;
+    public int VanillaCount;
+    public int StrawberryCount;
+    public int CoinsCount;
+
+    public MixType CurrentCake;
+    public MixType CurrentMix;
+    public MixType CurrentlyBakingCake;
+
     // Start is called before the first frame update
+    void Awake()
+    {
+        instance = this;
+
+        SpawnObjectsOnRandomNodesNoRepeat();
+
+        StartingWorld = new ();
+
+        StartingWorld.state.ActionsLeftToCook = 0;
+        StartingWorld.state.AvailableChocolate = ChocolateCount;
+        StartingWorld.state.AvailableStrawberry = StrawberryCount;
+        StartingWorld.state.AvailableVanilla = VanillaCount;
+        StartingWorld.state.Coins = CoinsCount;
+        StartingWorld.state.currentCake = MixType.None;
+        StartingWorld.state.currentMix = MixType.None;
+        StartingWorld.state.currentlyBakingCake = MixType.None;
+        StartingWorld.state.ShopOpen = true;
+    }
     void Start()
     {
-        SpawnObjectsOnRandomNodesNoRepeat();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Elegir nodo random
-            Node randomNode = _node[Random.Range(0, _node.Count)];
-            agent.GoToNode(randomNode);
-        }*/
+      
     }
     void SpawnObjectsOnRandomNodesNoRepeat()
     {
         List<Node> availableNodes = new List<Node>(_node);
 
-        foreach (var obj in objets)
+        for (int i = 0; i < VanillaCount; i++)
         {
             if (availableNodes.Count == 0)
             {
@@ -40,9 +65,39 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, availableNodes.Count);
             Node chosenNode = availableNodes[index];
 
-            Instantiate(obj.gameObject, chosenNode.transform.position, Quaternion.identity);
+            Vanilla.Add(Instantiate(Vanillaprefab, chosenNode.transform.position, Quaternion.identity));
 
-            availableNodes.RemoveAt(index); // evitar repetir nodo
+            availableNodes.RemoveAt(index);
+        }
+        for (int i = 0; i < ChocolateCount; i++)
+        {
+            if (availableNodes.Count == 0)
+            {
+                Debug.LogWarning("No quedan nodos disponibles para spawnear.");
+                break;
+            }
+
+            int index = Random.Range(0, availableNodes.Count);
+            Node chosenNode = availableNodes[index];
+
+            Vanilla.Add(Instantiate(Chocolateprefab, chosenNode.transform.position, Quaternion.identity));
+
+            availableNodes.RemoveAt(index);
+        }
+        for (int i = 0; i < StrawberryCount; i++)
+        {
+            if (availableNodes.Count == 0)
+            {
+                Debug.LogWarning("No quedan nodos disponibles para spawnear.");
+                break;
+            }
+
+            int index = Random.Range(0, availableNodes.Count);
+            Node chosenNode = availableNodes[index];
+
+            Vanilla.Add(Instantiate(Strawberryprefab, chosenNode.transform.position, Quaternion.identity));
+
+            availableNodes.RemoveAt(index);
         }
     }
 
