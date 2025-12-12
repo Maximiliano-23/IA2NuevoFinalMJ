@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int VanillaCount;
     public int StrawberryCount;
     public int CoinsCount;
+    public int hunger;
 
     public MixType CurrentCake;
     public MixType CurrentMix;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
         StartingWorld = new ();
 
+        StartingWorld.state.hunger = hunger;
         StartingWorld.state.ActionsLeftToCook = 0;
         StartingWorld.state.AvailableChocolate = ChocolateCount;
         StartingWorld.state.AvailableStrawberry = StrawberryCount;
