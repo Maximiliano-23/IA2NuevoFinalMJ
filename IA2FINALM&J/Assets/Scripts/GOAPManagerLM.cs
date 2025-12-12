@@ -248,11 +248,13 @@ public class GOAPManager
     {
         Func<WorldState, int> heuristic = x =>
         {
+            //Debug.Log("asas");
             return 0;
         };
 
         Func<WorldState, bool> objective = x =>
         {
+            Debug.Log(x.state.hunger);
             return x.state.hunger <= 0 ;
         };
 
