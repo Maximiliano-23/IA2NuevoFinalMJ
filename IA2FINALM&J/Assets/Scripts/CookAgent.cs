@@ -33,6 +33,12 @@ public class CookAgent : MonoBehaviour
 
     // FSM: usamos string como trigger/input
     EventFSM<string> fsm;
+
+    [SerializeField] GameObject BowlWithVanilla, BowlWithChocolate, BowlWithStrawberrys, Bowl, CakeVanilla, CakeChocolate, CakeStrawberry, zzzObject;
+
+    [SerializeField] Animator anim;
+
+
    
 
     void Start()
@@ -183,11 +189,81 @@ public class CookAgent : MonoBehaviour
         fsm = new EventFSM<string>(idleState);
     }
 
-    public void PickUpVanilla(string name) 
+    public void PickUpVanilla() 
     {
-        Debug.Log("Elegiste la vanilla: " + name);
+        BowlWithVanilla.SetActive(true);
     }
-  
+    public void PickUpChocolate()
+    {
+        BowlWithChocolate.SetActive(true);
+    }
+    public void PickUpStrawberrys()
+    {
+        BowlWithStrawberrys.SetActive(true);
+    }
+    public void Eat(string whatEat)
+    {
+        switch (whatEat)
+        {
+            case "Vanilla":
+                CakeVanilla.SetActive(false);
+                break;
+            case "Chocolate":
+                CakeChocolate.SetActive(false);
+                break;
+            case "Strawberry":
+                CakeStrawberry.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+    public void BakeCake(MixType type)
+    {
+        Bowl.SetActive(false);
+        switch (type)
+        {
+            case MixType.Vanilla:
+                BowlWithVanilla.SetActive(false);
+                break;
+            case MixType.Chocolate:
+                BowlWithChocolate.SetActive(false);
+                break;
+            case MixType.Strawberry:
+                BowlWithStrawberrys.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+    public void ActiveZzz()
+    {
+        zzzObject.SetActive(true);
+    }
+    public void MixIngredients()
+    {
+        anim.Play("Mix");
+    }
+    public void TakeCake(MixType type)
+    {
+        switch (type)
+        {
+            case MixType.Vanilla:
+                CakeVanilla.SetActive(true);
+                zzzObject.SetActive(false);
+                break;
+            case MixType.Chocolate:
+                CakeChocolate.SetActive(true);
+                zzzObject.SetActive(false);
+                break;
+            case MixType.Strawberry:
+                CakeStrawberry.SetActive(true);
+                zzzObject.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
     void TryPlan()
     {
         // ensure worldState is up-to-date (por ejemplo, worldState.state.ingredientsDetected etc.)

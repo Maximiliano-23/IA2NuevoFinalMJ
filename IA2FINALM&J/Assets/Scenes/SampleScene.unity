@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1767,9 +1767,9 @@ MonoBehaviour:
   - {fileID: 2132449020}
   - {fileID: 2031544194}
   - {fileID: 296520721}
-  Vanillaprefab: {fileID: 0}
-  Chocolateprefab: {fileID: 0}
-  Strawberryprefab: {fileID: 0}
+  Vanillaprefab: {fileID: 5017729661951899613, guid: 906dadd94876eef458d51e274fe92360, type: 3}
+  Chocolateprefab: {fileID: 453578762999038715, guid: a7722c78dc14dae4eae8e798d1eb756e, type: 3}
+  Strawberryprefab: {fileID: 302787820613203407, guid: 6a713cdf59e6c9045843dc8e252cec50, type: 3}
   Chocolate: []
   Vanilla: []
   Strawberry: []
@@ -3175,6 +3175,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1479433089
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 978220000774547354}
+    m_Modifications:
+    - target: {fileID: 734965428088986394, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_Name
+      value: ChefUtilWithIngridients
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3651574
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3651574
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3651574
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.814
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.123
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.483
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041902723807186207, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_Name
+      value: Strawberry
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009286015113972141, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_Name
+      value: Vanilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516523401065142719, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+      propertyPath: m_Name
+      value: Chocolate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+--- !u!4 &1479433090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1526545988702560331, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+  m_PrefabInstance: {fileID: 1479433089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1479433091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 734965428088986394, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+  m_PrefabInstance: {fileID: 1479433089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1479433092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3041902723807186207, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+  m_PrefabInstance: {fileID: 1479433089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1479433093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7516523401065142719, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+  m_PrefabInstance: {fileID: 1479433089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1479433094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6009286015113972141, guid: baa24c87bbc1cc74483349b04c6a1323, type: 3}
+  m_PrefabInstance: {fileID: 1479433089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1515813803
 GameObject:
   m_ObjectHideFlags: 0
@@ -4228,6 +4334,22 @@ PrefabInstance:
       propertyPath: gm
       value: 
       objectReference: {fileID: 650197512}
+    - target: {fileID: 5581774506920578314, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+      propertyPath: Bowl
+      value: 
+      objectReference: {fileID: 1479433091}
+    - target: {fileID: 5581774506920578314, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+      propertyPath: BowlWithVanilla
+      value: 
+      objectReference: {fileID: 1479433094}
+    - target: {fileID: 5581774506920578314, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+      propertyPath: BowlWithChocolate
+      value: 
+      objectReference: {fileID: 1479433093}
+    - target: {fileID: 5581774506920578314, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+      propertyPath: BowlWithStrawberrys
+      value: 
+      objectReference: {fileID: 1479433092}
     - target: {fileID: 6899891331791157103, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
       propertyPath: m_Name
       value: PJ
@@ -4289,8 +4411,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5097380026249985811, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7354976570232111908, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1479433090}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
 --- !u!114 &978220000774547353 stripped
@@ -4304,6 +4430,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafcf2cd3455ddc42970c11cc3e3ec69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &978220000774547354 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7354976570232111908, guid: 29d28987da9422249b80580f2b004c7d, type: 3}
+  m_PrefabInstance: {fileID: 978220000774547352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3907303189569692887
 PrefabInstance:
   m_ObjectHideFlags: 0

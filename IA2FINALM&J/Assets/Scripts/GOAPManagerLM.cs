@@ -8,6 +8,7 @@ public class GOAPManager
 {
     Pathfinding _pf;
     GameManager _gm;
+    MixType bakeType = MixType.None;
 
     public GOAPManager(GameManager gm)
     {
@@ -29,7 +30,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.PickUpVanilla),
 
             new GOAPActions("Pickup Chocolate")
             .SetCost(2)
@@ -40,7 +42,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.PickUpChocolate),
 
             new GOAPActions("Pickup Strawberry")
             .SetCost(2)
@@ -51,7 +54,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.PickUpStrawberrys),
 
 
             // --- Mezclar ---
@@ -66,7 +70,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.MixIngredients),
 
             // --- Comer ---
              new GOAPActions("Eat Strawberry")
@@ -80,7 +85,8 @@ public class GOAPManager
               
                 x.state.ActionsLeftToCook--;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.Eat("Strawberry")),
               new GOAPActions("Eat Vanilla")
             .SetCost(1)
             .Precondition(x => 
@@ -92,7 +98,8 @@ public class GOAPManager
                 
                 x.state.ActionsLeftToCook--;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.Eat("Vanilla")),
                 new GOAPActions("Eat Chocolate")
             .SetCost(1)
             .Precondition(x => 
@@ -104,7 +111,8 @@ public class GOAPManager
                 
                 x.state.ActionsLeftToCook--;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.Eat("Chocolate")),
 
             // --- Hornear ---
              new GOAPActions("Bake Cake")
@@ -113,12 +121,14 @@ public class GOAPManager
                 x.state.currentMix != MixType.None)
             .Effect(x =>
             {
+                bakeType = x.state.currentMix;
                 x.state.currentlyBakingCake = x.state.currentMix;
                 x.state.currentMix = MixType.None;
                 x.state.hunger += 0.1f;
                 x.state.ActionsLeftToCook = 4;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.BakeCake(bakeType)),
 
 
              new GOAPActions("Take out Cake")
@@ -127,12 +137,14 @@ public class GOAPManager
                 x.state.currentlyBakingCake != MixType.None && x.state.ActionsLeftToCook <= 0 )
             .Effect(x =>
             {
+                bakeType = x.state.currentMix;
                 x.state.currentCake = x.state.currentlyBakingCake;
                 x.state.currentlyBakingCake = MixType.None;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
-      
+            })
+            .SetBehaviour(()=>_gm.agent.TakeCake(bakeType)),
+
             new GOAPActions("Buy Ingredient Vanilla")
             .SetCost(2)
             .Precondition(x => x.state.ShopOpen &&
@@ -145,7 +157,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.PickUpVanilla),
            new GOAPActions("Buy Ingredient Chocolate")
             .SetCost(2)
             .Precondition(x => x.state.ShopOpen &&
@@ -158,7 +171,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.PickUpChocolate),
             new GOAPActions("Buy Ingredient Strawberry")
             .SetCost(2)
             .Precondition(x => x.state.ShopOpen &&
@@ -171,7 +185,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(_gm.agent.PickUpStrawberrys),
            new GOAPActions("Buy Cake Chocolate")
             .SetCost(2)
             .Precondition(x => x.state.ShopOpen && x.state.currentCake == MixType.None &&
@@ -184,7 +199,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.BakeCake(bakeType)),
            new GOAPActions("Buy Cake Vanilla")
             .SetCost(2)
             .Precondition(x => x.state.ShopOpen && x.state.currentCake == MixType.None &&
@@ -197,7 +213,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.BakeCake(bakeType)),
            new GOAPActions("Buy Cake Strawberry")
             .SetCost(2)
             .Precondition(x => x.state.ShopOpen && x.state.currentCake == MixType.None &&
@@ -210,7 +227,8 @@ public class GOAPManager
                 x.state.ActionsLeftToCook--;
                 x.state.hunger += 0.1f;
                 return x;
-            }),
+            })
+            .SetBehaviour(()=>_gm.agent.BakeCake(bakeType)),
 
              new GOAPActions("Wait for Cake")
             .SetCost(1)
@@ -221,6 +239,7 @@ public class GOAPManager
                 x.state.hunger += 0.1f;
                 return x;
             })
+            .SetBehaviour(_gm.agent.ActiveZzz),
         };
     }
 
