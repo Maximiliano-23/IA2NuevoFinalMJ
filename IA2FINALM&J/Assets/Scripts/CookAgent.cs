@@ -37,9 +37,13 @@ public class CookAgent : MonoBehaviour
     [SerializeField] GameObject BowlWithVanilla, BowlWithChocolate, BowlWithStrawberrys, Bowl, CakeVanilla, CakeChocolate, CakeStrawberry, zzzObject;
 
     [SerializeField] Animator anim;
+    public enum HunterMoves { Idle, Move, Pickup, Interact }
+    private EventFSM<HunterMoves> _myFsm;
 
-
-   
+    private void Awake()
+    {
+        BuildStatesAndFSM();
+    }
 
     void Start()
     {
@@ -53,7 +57,7 @@ public class CookAgent : MonoBehaviour
 
 
 
-        BuildStatesAndFSM();
+
     }
 
     void Update()
@@ -114,66 +118,45 @@ public class CookAgent : MonoBehaviour
             SetTransition("Pickup", pickupState).
             SetTransition("Interact", interactState).
             Done();
+        //Idle
+        idleState.OnEnter += x => {
 
+            material.color = Color.red;
+            TryPlan();
+        };
+        idleState.OnUpdate += () => {
+
+            if (currentPlan != null && planIndex < currentPlan.Count)
+            {
+                fsm.Feed("Move");
+            }
+        };
+        idleState.OnExit += x =>
+        {
+            Debug.Log("finishIdle");
+        };
+
+        //Move
         moveState.OnEnter += x => material.color = Color.blue;
         moveState.OnUpdate += () =>
         {
             if (_pathToFollow.Count > 0)
-                TravelThroughPath();//chequiar por objetivo final del GOAP
+            {
+                TravelThroughPath();
+            }
             else 
             { 
-                //avanzar al siguiente estado
+                
             }
         };
+        idleState.OnExit += x =>
+        {
+            Debug.Log("finishMove");
+        };
+
+        //pickup
         pickupState.OnEnter += x => material.color = Color.white;
         interactState.OnEnter += x => material.color = Color.green;
-        idleState.OnEnter += x => material.color = Color.red;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // 2) configurar eventos de lifecycle (Enter/Update/Exit)
-        idleState.OnEnter += (inpt) => {
-            // cuando entramos en Idle intentamos planear
-            TryPlan();
-        };
-        idleState.OnUpdate += () => {
-            // Si hay plan y no se está ejecutando ninguna acción, comenzamos
-            if (currentPlan != null && planIndex < currentPlan.Count)
-            {
-                // disparar transición a movimiento / ejecución
-                fsm.Feed("DO_ACTION");
-            }
-        };
-
-        moveState.OnEnter += (inpt) => {
-            // Al entrar a Move, tomar la acción actual y pedir movimiento
-            //StartMoveToCurrentActionTarget();
-        };
 
         // pickup: en Enter ejecutamos la recolección (simulado como coroutine breve)
         pickupState.OnEnter += (inpt) => {
@@ -188,7 +171,7 @@ public class CookAgent : MonoBehaviour
        
         fsm = new EventFSM<string>(idleState);
     }
-
+    //private void SendInputToFSM(HunterMoves inp) => _myFsm.SendInput(inp);
     public void PickUpVanilla() 
     {
         BowlWithVanilla.SetActive(true);
