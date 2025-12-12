@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: af21c5fab9afe6f4a8fbb370cfa465f0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a4ac54f59b094db47a5b31807529865e, type: 2}
     - target: {fileID: 919132149155446097, guid: af21c5fab9afe6f4a8fbb370cfa465f0, type: 3}
       propertyPath: m_Name
-      value: Exquisita (1) Variant
+      value: Chocolate
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af21c5fab9afe6f4a8fbb370cfa465f0, type: 3}
       propertyPath: m_TagString
