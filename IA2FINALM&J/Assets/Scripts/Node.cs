@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public Transform characterPos;// Reference to the position of the node
+    public Transform characterPos;
 
     public LayerMask Wall;
     public LayerMask nodeLayer;
@@ -35,7 +35,6 @@ public class Node : MonoBehaviour
     }
     private void DetectNeighbors()
     {
-        //Debug.Log("Entre");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, size, nodeLayer);
         foreach (var hitCollider in hitColliders)
         {

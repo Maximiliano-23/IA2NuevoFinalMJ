@@ -12,12 +12,10 @@ public class GOAPActions
 
     public int Cost { get; private set; }
 
-    // TARGETS
     public Node targetNode;
     public Vector3? targetPosition;
     public GameObject targetObject;
 
-    // ACTION BEHAVIOUR
     public Action agentBehaviour;
 
     public GOAPActions(string name)

@@ -4,11 +4,10 @@ using UnityEngine;
 using IA2;
 using System.Data;
 using System.Linq;
-using System; // tu namespace de EventFSM/State/Transition
+using System; 
 
 public class CookAgent : MonoBehaviour
 {
-    // refs
     public Inventory inventory;
     Pathfinding pathfinding;
     GameManager gm;
@@ -19,19 +18,16 @@ public class CookAgent : MonoBehaviour
     public List<Ingredient> Chocolate;
     public List<Ingredient> Vanilla;
 
-    // movement
     List<Vector3> currentPath;
     Vector3 FinalPos;
     int pathIndex = 0;
     public float speed = 3f;
     public List<Vector3> _pathToFollow = new List<Vector3>();
 
-    // planning
     List<Action> currentPlan;
     int planIndex = 0;
     public WorldState worldState = new WorldState();
 
-    // FSM: usamos string como trigger/input
     EventFSM<string> fsm;
 
     [SerializeField] GameObject BowlWithVanilla, BowlWithChocolate, BowlWithStrawberrys, Bowl, CakeVanilla, CakeChocolate, CakeStrawberry, zzzObject;
@@ -40,9 +36,13 @@ public class CookAgent : MonoBehaviour
     public enum HunterMoves { Idle, Move, Pickup, Interact }
     private EventFSM<HunterMoves> _myFsm;
 
+    Pathfinding _path;
+
+    bool changePath=false;
+
     private void Awake()
     {
-        BuildStatesAndFSM();
+        //BuildStatesAndFSM();
     }
 
     void Start()
@@ -56,136 +56,166 @@ public class CookAgent : MonoBehaviour
         material = GetComponent<Renderer>().material;
 
 
-
-
+        TryPlan();
+        StartCoroutine(WaitToNextAction());
     }
 
     void Update()
     {
        
-        fsm.Update();
+        //fsm.Update();
+        //
+        //if (currentPath != null && pathIndex < currentPath.Count)
+        //{
+        //    Vector3 targetPos = currentPath[pathIndex];
+        //    transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        //
+        //    if (Vector3.Distance(transform.position, targetPos) < 0.15f)
+        //    {
+        //        pathIndex++;
+        //        if (pathIndex >= currentPath.Count)
+        //        {
+        //            fsm.Feed("ARRIVED");
+        //        }
+        //    }
+        //}
 
-        // si estamos moviéndonos, avanzar en el path
-        // (la lógica de movimiento también puede ejecutarse desde el estado Move).
-        if (currentPath != null && pathIndex < currentPath.Count)
+        TravelThroughPath();
+        if (_pathToFollow.Count() <= 0)
         {
-            Vector3 targetPos = currentPath[pathIndex];
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, targetPos) < 0.15f)
-            {
-                pathIndex++;
-                if (pathIndex >= currentPath.Count)
-                {
-                    // llegada al destino
-                    fsm.Feed("ARRIVED");
-                }
-            }
+            //TravelThroughPath().First();
         }
     }
 
-    // ------------------------------
-    // BUILD FSM (usando State<T>.Configure)
-    // ------------------------------
-    void BuildStatesAndFSM()
-    {
-        var idleState = new State<string>("Idle");
-        var moveState = new State<string>("Move");
-        var pickupState = new State<string>("Pickup");
-        var interactState = new State<string>("Interact");
-
-        StateConfigurer.Create(idleState).
-            SetTransition("Idle", idleState).
-            SetTransition("Move", moveState).
-            SetTransition("Pickup", pickupState).
-            SetTransition("Interact", interactState).
-            Done();
-        StateConfigurer.Create(moveState).
-            SetTransition("Idle", idleState).
-            SetTransition("Move", moveState).
-            SetTransition("Pickup", pickupState).
-            SetTransition("Interact", interactState).
-            Done();
-        StateConfigurer.Create(pickupState).
-            SetTransition("Idle", idleState).
-            SetTransition("Move", moveState).
-            SetTransition("Pickup", pickupState).
-            SetTransition("Interact", interactState).
-            Done();
-        StateConfigurer.Create(interactState).
-            SetTransition("Idle", idleState).
-            SetTransition("Move", moveState).
-            SetTransition("Pickup", pickupState).
-            SetTransition("Interact", interactState).
-            Done();
-        //Idle
-        idleState.OnEnter += x => {
-
-            material.color = Color.red;
-            TryPlan();
-        };
-        idleState.OnUpdate += () => {
-
-            if (currentPlan != null && planIndex < currentPlan.Count)
-            {
-                fsm.Feed("Move");
-            }
-        };
-        idleState.OnExit += x =>
-        {
-            Debug.Log("finishIdle");
-        };
-
-        //Move
-        moveState.OnEnter += x => material.color = Color.blue;
-        moveState.OnUpdate += () =>
-        {
-            if (_pathToFollow.Count > 0)
-            {
-                TravelThroughPath();
-            }
-            else 
-            { 
-                
-            }
-        };
-        idleState.OnExit += x =>
-        {
-            Debug.Log("finishMove");
-        };
-
-        //pickup
-        pickupState.OnEnter += x => material.color = Color.white;
-        interactState.OnEnter += x => material.color = Color.green;
-
-        // pickup: en Enter ejecutamos la recolección (simulado como coroutine breve)
-        pickupState.OnEnter += (inpt) => {
-            StartCoroutine(DoPickupCoroutine());
-        };
-
-        interactState.OnEnter += (inpt) => {
-            //StartCoroutine(DoInteractCoroutine());
-        };
-
-
-       
-        fsm = new EventFSM<string>(idleState);
-    }
-    //private void SendInputToFSM(HunterMoves inp) => _myFsm.SendInput(inp);
+    //void BuildStatesAndFSM()
+    //{
+    //    var idleState = new State<string>("Idle");
+    //    var moveState = new State<string>("Move");
+    //    var pickupState = new State<string>("Pickup");
+    //    var interactState = new State<string>("Interact");
+    //
+    //    StateConfigurer.Create(idleState).
+    //        SetTransition("Idle", idleState).
+    //        SetTransition("Move", moveState).
+    //        SetTransition("Pickup", pickupState).
+    //        SetTransition("Interact", interactState).
+    //        Done();
+    //    StateConfigurer.Create(moveState).
+    //        SetTransition("Idle", idleState).
+    //        SetTransition("Move", moveState).
+    //        SetTransition("Pickup", pickupState).
+    //        SetTransition("Interact", interactState).
+    //        Done();
+    //    StateConfigurer.Create(pickupState).
+    //        SetTransition("Idle", idleState).
+    //        SetTransition("Move", moveState).
+    //        SetTransition("Pickup", pickupState).
+    //        SetTransition("Interact", interactState).
+    //        Done();
+    //    StateConfigurer.Create(interactState).
+    //        SetTransition("Idle", idleState).
+    //        SetTransition("Move", moveState).
+    //        SetTransition("Pickup", pickupState).
+    //        SetTransition("Interact", interactState).
+    //        Done();
+    //    //Idle
+    //    idleState.OnEnter += x => {
+    //
+    //        //TryPlan();
+    //    };
+    //    idleState.OnUpdate += () => {
+    //
+    //        if (currentPlan != null && planIndex < currentPlan.Count)
+    //        {
+    //            fsm.Feed("Move");
+    //        }
+    //    };
+    //    idleState.OnExit += x =>
+    //    {
+    //        Debug.Log("finishIdle");
+    //    };
+    //
+    //    //Move
+    //    moveState.OnEnter += x => material.color = Color.blue;
+    //    moveState.OnUpdate += () =>
+    //    {
+    //        if (_pathToFollow.Count > 0)
+    //        {
+    //            pathfinding.AStar(GameManager.instance.ObtenerNodoCercano(this.transform.position),);
+    //            _pathToFollow
+    //            TravelThroughPath();
+    //        }
+    //        else 
+    //        { 
+    //            
+    //        }
+    //    };
+    //    idleState.OnExit += x =>
+    //    {
+    //        Debug.Log("finishMove");
+    //    };
+    //
+    //    //pickup
+    //    pickupState.OnEnter += x => material.color = Color.white;
+    //    interactState.OnEnter += x => material.color = Color.green;
+    //
+    //    // pickup: en Enter ejecutamos la recolección (simulado como coroutine breve)
+    //    pickupState.OnEnter += (inpt) => {
+    //        StartCoroutine(DoPickupCoroutine());
+    //    };
+    //
+    //    interactState.OnEnter += (inpt) => {
+    //        //StartCoroutine(DoInteractCoroutine());
+    //    };
+    //
+    //
+    //   
+    //    fsm = new EventFSM<string>(idleState);
+    //}
     public void PickUpVanilla() 
     {
-        BowlWithVanilla.SetActive(true);
+        Debug.Log("PickUpVanilla");
+        var closestVanilla = GameManager.instance.Vanilla.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).First();
+        _pathToFollow = pathfinding.AStar(GameManager.instance.FinalNode(transform.position),GameManager.instance.FinalNode(closestVanilla.transform.position));
+        StartCoroutine(WaitToReach(() => { 
+            BowlWithVanilla.SetActive(true);
+            GameManager.instance.Vanilla.Remove(closestVanilla);
+            Destroy(closestVanilla.gameObject); }));
+        changePath = true;
+
+
     }
     public void PickUpChocolate()
     {
-        BowlWithChocolate.SetActive(true);
+        Debug.Log("PickUpChocolate");
+        var closestChocolate = GameManager.instance.Chocolate.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).First();
+        _pathToFollow = pathfinding.AStar(GameManager.instance.FinalNode(transform.position), GameManager.instance.FinalNode(closestChocolate.transform.position));
+        StartCoroutine(WaitToReach(() => { 
+            BowlWithChocolate.SetActive(true);
+            GameManager.instance.Chocolate.Remove(closestChocolate);
+            Destroy(closestChocolate.gameObject); }));
+        changePath = true;
+
     }
     public void PickUpStrawberrys()
     {
-        BowlWithStrawberrys.SetActive(true);
+        Debug.Log("PickUpStrawberrys");
+
+        var closestStrawberry = GameManager.instance.Chocolate.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).First();
+
+        _pathToFollow = pathfinding.AStar(GameManager.instance.FinalNode(transform.position), GameManager.instance.FinalNode(closestStrawberry.transform.position));
+        
+        StartCoroutine(WaitToReach(() => { 
+            BowlWithStrawberrys.SetActive(true); 
+            GameManager.instance.Strawberry.Remove(closestStrawberry);
+            Destroy(closestStrawberry.gameObject); }));
+
+        changePath = true;
+
     }
     public void Eat(string whatEat)
     {
+        Debug.Log("Eat");
         switch (whatEat)
         {
             case "Vanilla":
@@ -200,35 +230,52 @@ public class CookAgent : MonoBehaviour
             default:
                 break;
         }
+        StartCoroutine(WaitToNextAction());
     }
     public void BakeCake(MixType type)
     {
-        Bowl.SetActive(false);
-        switch (type)
-        {
-            case MixType.Vanilla:
-                BowlWithVanilla.SetActive(false);
-                break;
-            case MixType.Chocolate:
-                BowlWithChocolate.SetActive(false);
-                break;
-            case MixType.Strawberry:
-                BowlWithStrawberrys.SetActive(false);
-                break;
-            default:
-                break;
-        }
+        Debug.Log("BakeCake");
+        _pathToFollow = pathfinding.AStar(GameManager.instance.FinalNode(transform.position), GameManager.instance.FinalNode(GameManager.instance.Oven.transform.position));
+        StartCoroutine(WaitToReach(()=>{
+            Bowl.SetActive(false);
+            switch (type)
+            {
+                case MixType.Vanilla:
+                    BowlWithVanilla.SetActive(false);
+                    break;
+                case MixType.Chocolate:
+                    BowlWithChocolate.SetActive(false);
+                    break;
+                case MixType.Strawberry:
+                    BowlWithStrawberrys.SetActive(false);
+                    break;
+                default:
+                    break;
+            }
+        }));
+        changePath = true;
+
+    }
+    IEnumerator WaitToReach(Action action)
+    {
+        yield return new WaitWhile(() => _pathToFollow.Count() > 0);
+        action();
     }
     public void ActiveZzz()
     {
+        Debug.Log("ActiveZzz");
         zzzObject.SetActive(true);
+        StartCoroutine(WaitToNextAction());
     }
     public void MixIngredients()
     {
+        Debug.Log("MixIngredients");
         anim.SetBool("Mix",true);
+        StartCoroutine(WaitToNextAction());
     }
     public void TakeCake(MixType type)
     {
+        Debug.Log("TakeCake");
         switch (type)
         {
             case MixType.Vanilla:
@@ -246,11 +293,13 @@ public class CookAgent : MonoBehaviour
             default:
                 break;
         }
+        StartCoroutine(WaitToNextAction());
+        _pathToFollow = pathfinding.AStar(GameManager.instance.FinalNode(transform.position), GameManager.instance.FinalNode(GameManager.instance.Oven.transform.position));
+        changePath = true;
     }
     void TryPlan()
     {
-        // ensure worldState is up-to-date (por ejemplo, worldState.state.ingredientsDetected etc.)
-        if (goap.TryGetPlan(worldState, out List<GOAPActions> plan))
+        if (goap.TryGetPlan(GameManager.instance.StartingWorld, out List<GOAPActions> plan))
         {
             currentPlan = plan.Select(x => x.agentBehaviour).ToList();
             planIndex = 0;
@@ -265,16 +314,29 @@ public class CookAgent : MonoBehaviour
 
     public void TravelThroughPath()
     {
-        if (_pathToFollow == null || _pathToFollow.Count == 0) return;
-        Vector3 posTarget = _pathToFollow[0];
-        Vector3 dir = posTarget - transform.position;
-        if (dir.magnitude < 0.05f)
+        if (changePath && _pathToFollow.Count() <= 0)
         {
-            //SetPosition(posTarget);
-            _pathToFollow.RemoveAt(0);
+            changePath = false;
+            StartCoroutine(WaitToNextAction());
         }
+        if (_pathToFollow == null || _pathToFollow.Count == 0) return;
+            Vector3 posTarget = _pathToFollow[0];
+            Vector3 dir = posTarget - transform.position;
+            if (dir.magnitude < 0.05f)
+            {
+                //SetPosition(posTarget);
+                _pathToFollow.RemoveAt(0);
+            }
 
-        Move(dir);
+            Move(dir);
+        
+    }
+    IEnumerator WaitToNextAction()
+    {
+        yield return new WaitForSeconds(2f);
+        changePath = true;
+        var current = currentPlan.First();
+        current();
     }
 
     public void Move(Vector3 dir)
@@ -283,9 +345,6 @@ public class CookAgent : MonoBehaviour
         transform.position += dir.normalized * speed * Time.deltaTime;
     }
 
-    // ------------------------------
-    // MOVEMENT / helpers
-    // ------------------------------
     Node GetClosestNode()
     {
         Node best = null;
@@ -387,4 +446,5 @@ public class CookAgent : MonoBehaviour
         while (t < seconds) { t += Time.deltaTime; yield return null; }
         fsm.Feed("DONE");
     }
+    
 }

@@ -17,13 +17,12 @@ namespace IA2 {
         {
 			State<T> newState;
 
-			//Added any. Notice the or will not execute the second part if it satisfies the first condition.
 			if (current.Feed(input, out newState) || any.Feed(input, out newState)) {
 				current.Exit(input);
 				Debug.Log("FSM state: " + current.Name + "---" + input+"---> "+newState.Name);
 				current = newState;
 				current.Enter(input);
-				return true;	//Added return boolean
+				return true;	
 			}
 			return false;
 		}
