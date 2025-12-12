@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2760219276559086625}
-  - {fileID: 3542963849885146694}
+  - {fileID: 8607417441620757637}
   - {fileID: 5638656521985279154}
   - {fileID: 8529436699811333265}
   - {fileID: 5292273080234013852}
@@ -224,6 +224,38 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.50000024
   m_Center: {x: 0, y: -0.0000009536743, z: 0.0000019073495}
+--- !u!1 &3658684016860566535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8607417441620757637}
+  m_Layer: 0
+  m_Name: WhiskPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8607417441620757637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658684016860566535}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3542963849885146694}
+  m_Father: {fileID: 1526545988702560331}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4984901287738628888
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 276002414288067614}
-  m_Father: {fileID: 1526545988702560331}
+  m_Father: {fileID: 8607417441620757637}
   m_LocalEulerAnglesHint: {x: -155.018, y: 84.675, z: -75.91699}
 --- !u!33 &5965137076647881356
 MeshFilter:

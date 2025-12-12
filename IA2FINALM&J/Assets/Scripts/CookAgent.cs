@@ -242,7 +242,7 @@ public class CookAgent : MonoBehaviour
     }
     public void MixIngredients()
     {
-        anim.Play("Mix");
+        anim.SetBool("Mix",true);
     }
     public void TakeCake(MixType type)
     {
