@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public int StrawberryCount;
     public int CoinsCount;
     public int hunger;
+    public bool shopOpen;
+    [Range (0,4)]public int actionsLeftToCook;
 
     public GameObject Oven, SuperMarket;
 
@@ -32,24 +34,24 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(this);
         SpawnObjectsOnRandomNodesNoRepeat();
+        StartingWorld = new();
+
+        StartingWorld.state.hunger = hunger;
+        StartingWorld.state.ActionsLeftToCook = actionsLeftToCook;
+        StartingWorld.state.AvailableChocolate = ChocolateCount;
+        StartingWorld.state.AvailableStrawberry = StrawberryCount;
+        StartingWorld.state.AvailableVanilla = VanillaCount;
+        StartingWorld.state.Coins = CoinsCount;
+        StartingWorld.state.currentCake = CurrentCake;
+        StartingWorld.state.currentMix = CurrentMix;
+        StartingWorld.state.currentlyBakingCake = CurrentlyBakingCake;
+        StartingWorld.state.ShopOpen = shopOpen;
+        StartingWorld.state.currentIngredient = currentIngredient;
     }
 
     void Start()
     {
 
-        StartingWorld = new();
-
-        StartingWorld.state.hunger = hunger;
-        StartingWorld.state.ActionsLeftToCook = 0;
-        StartingWorld.state.AvailableChocolate = ChocolateCount;
-        StartingWorld.state.AvailableStrawberry = StrawberryCount;
-        StartingWorld.state.AvailableVanilla = VanillaCount;
-        StartingWorld.state.Coins = CoinsCount;
-        StartingWorld.state.currentCake = MixType.None;
-        StartingWorld.state.currentMix = MixType.None;
-        StartingWorld.state.currentlyBakingCake = MixType.None;
-        StartingWorld.state.ShopOpen = true;
-        StartingWorld.state.currentIngredient = currentIngredient;
     }
     void SpawnObjectsOnRandomNodesNoRepeat()
     {

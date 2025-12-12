@@ -42,7 +42,7 @@ public class CookAgent : MonoBehaviour
 
     private void Awake()
     {
-        //BuildStatesAndFSM();
+
     }
 
     void Start()
@@ -63,115 +63,14 @@ public class CookAgent : MonoBehaviour
     void Update()
     {
        
-        //fsm.Update();
-        //
-        //if (currentPath != null && pathIndex < currentPath.Count)
-        //{
-        //    Vector3 targetPos = currentPath[pathIndex];
-        //    transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-        //
-        //    if (Vector3.Distance(transform.position, targetPos) < 0.15f)
-        //    {
-        //        pathIndex++;
-        //        if (pathIndex >= currentPath.Count)
-        //        {
-        //            fsm.Feed("ARRIVED");
-        //        }
-        //    }
-        //}
 
         TravelThroughPath();
         if (_pathToFollow.Count() <= 0)
         {
-            //TravelThroughPath().First();
+           
         }
     }
 
-    //void BuildStatesAndFSM()
-    //{
-    //    var idleState = new State<string>("Idle");
-    //    var moveState = new State<string>("Move");
-    //    var pickupState = new State<string>("Pickup");
-    //    var interactState = new State<string>("Interact");
-    //
-    //    StateConfigurer.Create(idleState).
-    //        SetTransition("Idle", idleState).
-    //        SetTransition("Move", moveState).
-    //        SetTransition("Pickup", pickupState).
-    //        SetTransition("Interact", interactState).
-    //        Done();
-    //    StateConfigurer.Create(moveState).
-    //        SetTransition("Idle", idleState).
-    //        SetTransition("Move", moveState).
-    //        SetTransition("Pickup", pickupState).
-    //        SetTransition("Interact", interactState).
-    //        Done();
-    //    StateConfigurer.Create(pickupState).
-    //        SetTransition("Idle", idleState).
-    //        SetTransition("Move", moveState).
-    //        SetTransition("Pickup", pickupState).
-    //        SetTransition("Interact", interactState).
-    //        Done();
-    //    StateConfigurer.Create(interactState).
-    //        SetTransition("Idle", idleState).
-    //        SetTransition("Move", moveState).
-    //        SetTransition("Pickup", pickupState).
-    //        SetTransition("Interact", interactState).
-    //        Done();
-    //    //Idle
-    //    idleState.OnEnter += x => {
-    //
-    //        //TryPlan();
-    //    };
-    //    idleState.OnUpdate += () => {
-    //
-    //        if (currentPlan != null && planIndex < currentPlan.Count)
-    //        {
-    //            fsm.Feed("Move");
-    //        }
-    //    };
-    //    idleState.OnExit += x =>
-    //    {
-    //        Debug.Log("finishIdle");
-    //    };
-    //
-    //    //Move
-    //    moveState.OnEnter += x => material.color = Color.blue;
-    //    moveState.OnUpdate += () =>
-    //    {
-    //        if (_pathToFollow.Count > 0)
-    //        {
-    //            pathfinding.AStar(GameManager.instance.ObtenerNodoCercano(this.transform.position),);
-    //            _pathToFollow
-    //            TravelThroughPath();
-    //        }
-    //        else 
-    //        { 
-    //            
-    //        }
-    //    };
-    //    idleState.OnExit += x =>
-    //    {
-    //        Debug.Log("finishMove");
-    //    };
-    //
-    //    //pickup
-    //    pickupState.OnEnter += x => material.color = Color.white;
-    //    interactState.OnEnter += x => material.color = Color.green;
-    //
-    //    // pickup: en Enter ejecutamos la recolección (simulado como coroutine breve)
-    //    pickupState.OnEnter += (inpt) => {
-    //        StartCoroutine(DoPickupCoroutine());
-    //    };
-    //
-    //    interactState.OnEnter += (inpt) => {
-    //        //StartCoroutine(DoInteractCoroutine());
-    //    };
-    //
-    //
-    //   
-    //    fsm = new EventFSM<string>(idleState);
-    //}
     public void PickUpVanilla() 
     {
         Debug.Log("PickUpVanilla");
@@ -303,6 +202,11 @@ public class CookAgent : MonoBehaviour
         {
             currentPlan = plan.Select(x => x.agentBehaviour).ToList();
             planIndex = 0;
+            var goapActiiiions = plan;
+            foreach (var item in goapActiiiions)
+            {
+                Debug.Log(item.Name);
+            }
             Debug.Log("Plan obtenido con " + plan.Count + " acciones.");
         }
         else
@@ -334,14 +238,17 @@ public class CookAgent : MonoBehaviour
     IEnumerator WaitToNextAction()
     {
         yield return new WaitForSeconds(2f);
-        changePath = true;
-        var current = currentPlan.First();
-        current();
+        if(currentPlan.Count()>0)
+        {
+            var current = currentPlan.First();
+            current();
+            currentPlan.RemoveAt(0);
+        }
     }
 
     public void Move(Vector3 dir)
     {
-        transform.LookAt(transform.position + dir, Vector3.back);
+        transform.LookAt(transform.position + dir, Vector3.up);
         transform.position += dir.normalized * speed * Time.deltaTime;
     }
 
@@ -357,88 +264,18 @@ public class CookAgent : MonoBehaviour
         return best;
     }
 
-    /*void StartMoveToCurrentActionTarget()
-    {
-        if (currentPlan == null || planIndex >= currentPlan.Count)
-        {
-            // nada que hacer
-            fsm.Feed("DONE");
-            return;
-        }
-
-        //GOAPActions action = currentPlan[planIndex];
-
-        // Necesitamos decidir destino físico según nombre de la acción
-        // EJEMPLO SIMPLE: si la acción es "Go to Bowl" mover al primer nodo que tenga bowlNearby true
-        Node targetNode = null;
-
-        if (action.Name.Contains("Bowl"))
-        {
-            // buscar nodo asociado al bowl (ejemplo sencillo: primer nodo con bowlNearby flag en WorldState)
-            // adaptalo a cómo tú realmente referencies bowl/oven en escena
-            targetNode = gm._node.Find(n => Vector3.Distance(n.transform.position, transform.position) > 0f);
-        }
-        else if (action.Name.Contains("Oven"))
-        {
-            targetNode = gm._node[0]; // placeholder; adaptá a nodo horno real
-        }
-        else
-        {
-            // por defecto: moverse al nodo más cercano (o a un nodo random)
-            targetNode = GetClosestNode();
-        }
-
-        Node start = GetClosestNode();
-        currentPath = pathfinding.AStar(start, targetNode);
-        pathIndex = 0;
-
-        if (currentPath == null)
-        {
-            Debug.LogWarning("No se encontró path para la acción: " + action.Name);
-            // pasar a siguiente / replanificar
-            planIndex++;
-            fsm.Feed("DONE");
-        }
-    }*/
 
     IEnumerator DoPickupCoroutine()
     {
-        // ejemplo simple: esperar, recoger, actualizar estado
         yield return new WaitForSeconds(0.5f);
 
-        // actualizar WorldState e inventario según corresponda
-        
 
-        // avanzar plan
         planIndex++;
 
-        // volver a Idle
+
         fsm.Feed("DONE");
     }
 
-    /*IEnumerator DoInteractCoroutine()
-    {
-        GOAPActions action = currentPlan != null && planIndex < currentPlan.Count ? currentPlan[planIndex] : null;
-        if (action != null)
-        {
-            // ejecutar comportamiento opcional (si el action tiene agenteBehaviour)
-            action.agentBehaviour?.Invoke(this);
-
-            // aplicar efectos del action sobre el worldState
-            worldState = action.Effects(worldState);
-
-            // simular tiempo de ejecución
-            yield return new WaitForSeconds(1f);
-
-            planIndex++;
-        }
-        else
-        {
-            yield return null;
-        }
-
-        fsm.Feed("DONE");
-    }*/
 
     IEnumerator DoWaitCoroutine(float seconds)
     {
